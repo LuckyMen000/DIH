@@ -8,7 +8,7 @@ const AppRouter = () => {
     <Router>
       <Layout>
         <Routes>
-          <Route path="/" element={<MainPage />} />
+          <Route path="/main" element={<MainPage />} />
           <Route path="*" element={<Navigate replace to="/" />} />
         </Routes>
       </Layout>
