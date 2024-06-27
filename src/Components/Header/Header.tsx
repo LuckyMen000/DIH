@@ -1,16 +1,35 @@
 import React, { useEffect, useRef, useState } from 'react';
 import {
-  Box, Flex, Input, InputGroup, InputRightElement, IconButton, Button,
-  Menu, MenuButton, MenuList, MenuItem, Modal, ModalOverlay, ModalContent,
-  ModalHeader, ModalCloseButton, ModalBody, useDisclosure
+  Box, 
+  Flex, 
+  Input, 
+  InputGroup, 
+  InputRightElement, 
+  IconButton, 
+  Button,
+  Menu, 
+  MenuButton, 
+  MenuList, 
+  MenuItem, 
+  Modal, 
+  ModalOverlay, 
+  ModalContent,
+  ModalHeader, 
+  ModalCloseButton, 
+  ModalBody, 
+  useDisclosure,
+  Text,
+  Heading,
+  VStack,
+  Center
 } from '@chakra-ui/react';
-import { FaSearch, FaShoppingCart, FaUser, FaTerminal, FaRegCalendarAlt, FaClipboardList, FaRegEdit } from 'react-icons/fa';
+import { FaSearch, FaShoppingCart, FaUser, FaTerminal, FaRegCalendarAlt, FaClipboardList, FaRegEdit, FaGoogle, FaGithub} from 'react-icons/fa';
 import { MdLanguage, MdMoreVert } from 'react-icons/md';
 import DIH_Header_Logo from '../../Assets/images/DIH Header Logo.webp';
 
 function Header() {
   const searchInputRef = useRef<HTMLInputElement>(null);
-  const { isOpen, onOpen, onClose } = useDisclosure(); // Хуки для управления открытием и закрытием модального окна
+  const { isOpen, onOpen, onClose } = useDisclosure(); 
 
   const handleKeyPress = (event: KeyboardEvent) => {
     if (event.ctrlKey && (event.key === 'k' || event.key === 'л')) {
@@ -48,7 +67,7 @@ function Header() {
         <InputGroup>
           <Input ref={searchInputRef} placeholder="Поиск..." bg="white" color="gray.800" _placeholder={{ color: 'gray.500' }} />
           <InputRightElement>
-            <IconButton aria-label="Search" icon={<FaSearch />} size="md" bg="transparent" _hover={{ bg: 'white' }} />
+            <IconButton aria-label="Search" icon={<FaSearch />} size="md" bg="transparent" />
           </InputRightElement>
         </InputGroup>
         <Box ml={4}>
@@ -82,13 +101,20 @@ function Header() {
         <Button rightIcon={<FaUser />} variant="ghost" onClick={onOpen}>Вход</Button>
       </Flex>
 
-      <Modal isOpen={isOpen} onClose={onClose}>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>Вход в систему</ModalHeader>
+          <ModalHeader>Войти или зарегистрироваться</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            Форма для входа пользователя...
+            <VStack spacing={4}>
+              <Input placeholder="Введите почту или логин" />
+              <Button colorScheme="blue" w="full">Продолжить</Button>
+              <Text fontSize="sm" alignSelf="center" mt={4} mb={2}>Или</Text>
+              <Button leftIcon={<FaGoogle />} colorScheme="red" w="full">Войти через Google</Button>
+              <Button leftIcon={<FaGithub />} colorScheme="gray" w="full">Войти через GitHub</Button>
+              <Text style={{ textAlign:"center" }}>Просим обеспечить конфиденциальность имени пользователя и пароля! Продолжая, Вы принимаете условия и предложения Digital Innovators Hub</Text>
+            </VStack>
           </ModalBody>
         </ModalContent>
       </Modal>
